@@ -16,13 +16,26 @@
 
 package uk.gov.hmrc.agentriskingbackend.controllers
 
+import play.api.libs.json.Format.GenericFormat
+import play.api.libs.json.Format
+import play.api.libs.json.JsError
+import play.api.libs.json.JsValue
+import play.api.libs.json.Json
+import play.api.libs.json.Reads
 import play.api.mvc.Action
-import play.api.mvc.AnyContent
 import play.api.mvc.ControllerComponents
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
 import javax.inject.Inject
 import javax.inject.Singleton
+
+final case class RiskingRequest(
+  arn: String,
+  utr: Option[String]
+)
+
+object RiskingRequest:
+  given Format[RiskingRequest] = Json.format[RiskingRequest]
 
 @Singleton()
 class EnsureRiskingController @Inject() (
@@ -30,7 +43,7 @@ class EnsureRiskingController @Inject() (
 )
 extends BackendController(cc):
 
-  def run(): Action[AnyContent] = Action:
-    implicit request =>
-      val json = request.body.asJson
-      json.fold(NoContent)(json => Ok(json))
+  def run(): Action[RiskingRequest] =
+    Action(parse.json[RiskingRequest]):
+      implicit request =>
+        Ok(Json.toJson(request.body))

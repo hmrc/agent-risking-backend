@@ -17,26 +17,34 @@
 package uk.gov.hmrc.agentriskingbackend.controllers
 
 import play.api.http.Status
-import play.api.libs.json.Json
+import play.api.mvc.Request
 import play.api.mvc.Result
 import play.api.test.Helpers.*
 import play.api.test.FakeRequest
 import play.api.test.Helpers
+import play.api.libs.json.Json
+import uk.gov.hmrc.http.HttpResponse
+import uk.gov.hmrc.http.StringContextOps
+import uk.gov.hmrc.agentriskingbackend.util.RequestSupport.hc
 import uk.gov.hmrc.agentriskingbackend.testsupport.ControllerSpec
-
-import scala.concurrent.Future
+import uk.gov.hmrc.http.HttpReads.Implicits.given
+import uk.gov.hmrc.http.HttpResponse
+import uk.gov.hmrc.http.StringContextOps
+import play.api.libs.ws.JsonBodyWritables.given
 
 class EnsureRiskingControllerSpec
 extends ControllerSpec:
 
-  private val fakeRequest = FakeRequest("POST", "/")
-  private val controller = new EnsureRiskingController(Helpers.stubControllerComponents())
+  "return Ok with body json" in:
+    val riskingRequest = RiskingRequest(arn = "123", utr = None)
+    given request: Request[?] = tdAll.backendRequest
 
-  "return NoContent if body has no json" in:
-    val result = controller.run()(fakeRequest)
-    status(result) shouldBe Status.NO_CONTENT
+    val response =
+      httpClient
+        .post(url"$baseUrl/agent-risking-backend/ensure-risking")
+        .withBody(Json.toJson(riskingRequest))
+        .execute[HttpResponse]
+        .futureValue
 
-  "return Ok(json) if body has json" in:
-    val fakeRequestWithBody = fakeRequest.withJsonBody(Json.parse("{}"))
-    val result: Future[Result] = controller.run()(fakeRequestWithBody)
-    status(result) shouldBe Status.OK
+    response.status shouldBe Status.OK
+    response.body should include("""{"arn":"123"}""")
