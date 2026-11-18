@@ -62,15 +62,7 @@ extends AnyFreeSpecLike,
       "auditing.consumer.baseUri.port" -> WireMockSupport.port,
       "auditing.enabled" -> false,
       "auditing.traceRequests" -> false,
-      "microservice.services.auth.port" -> WireMockSupport.port,
-      "microservice.services.des.port" -> WireMockSupport.port,
-      "microservice.services.hip.port" -> WireMockSupport.port,
-      "microservice.services.hip.authorization-token" -> "test-hip-auth-token",
-      "microservice.services.internal-auth.port" -> WireMockSupport.port,
-      "microservice.services.object-store.port" -> WireMockSupport.port,
-      "internal-auth.enabled" -> false,
       "mongodb.uri" -> mongoUri,
-      "hasher.key" -> "U/g3pVPBa/hIJ109AIwEeuRefPzeqXB312MTw/JTF00="
     ) ++ configOverrides
 
   protected def configOverrides: Map[String, Any] = Map[String, Any]()
@@ -102,4 +94,4 @@ extends AnyFreeSpecLike,
   }
 
 object ISpec:
-  val testServerPort: Int = 19002 // not 19001: frontend uses that; avoids cross-repo clashes
+  val testServerPort: Int = 19004 // distinct per repo so sibling repos' suites do not clash

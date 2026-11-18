@@ -1,6 +1,6 @@
 ThisBuild / majorVersion := 0
 ThisBuild / scalaVersion := "3.7.0"
-val playPort: Int = 22202
+val playPort: Int = 22204
 ThisBuild / scalafmtOnCompile := true
 ThisBuild / semanticdbEnabled := true
 ThisBuild / scalafixOnCompile := true
