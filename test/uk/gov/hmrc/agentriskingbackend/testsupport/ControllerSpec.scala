@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.agentriskingbackend.controllers
+package uk.gov.hmrc.agentriskingbackend.testsupport
 
-import play.api.mvc.Action
-import play.api.mvc.AnyContent
-import play.api.mvc.ControllerComponents
-import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
+import play.api.libs.ws.WSClient
+import uk.gov.hmrc.http.client.HttpClientV2
 
-import javax.inject.Inject
-import javax.inject.Singleton
+trait ControllerSpec
+extends ISpec:
 
-@Singleton()
-class MicroserviceHelloWorldController @Inject() (
-  cc: ControllerComponents
-)
-extends BackendController(cc):
-
-  val hello: Action[AnyContent] = Action:
-    implicit request =>
-      Ok("Hello world")
+  val wsClient: WSClient = app.injector.instanceOf[WSClient]
+  val httpClient: HttpClientV2 = app.injector.instanceOf[HttpClientV2]

@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 HM Revenue & Customs
+ * Copyright 2025 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,27 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.agentriskingbackend.controllers
+package uk.gov.hmrc.agentriskingbackend.testsupport
 
+import org.scalatest.*
+import org.scalatest.concurrent.ScalaFutures
+import org.scalatest.concurrent.IntegrationPatience
+import org.scalatest.concurrent.Eventually
+import org.scalatest.diagrams.Diagrams
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.wordspec.AnyWordSpec
-import play.api.http.Status
-import play.api.test.Helpers._
-import play.api.test.FakeRequest
-import play.api.test.Helpers
 
-class MicroserviceHelloWorldControllerSpec
-extends AnyWordSpec
-with Matchers:
+object RichMatchers
+extends RichMatchers
 
-  private val fakeRequest = FakeRequest("GET", "/")
-  private val controller = new MicroserviceHelloWorldController(Helpers.stubControllerComponents())
-
-  "GET /" should:
-    "return 200" in:
-      val result = controller.hello()(fakeRequest)
-      status(result) shouldBe Status.OK
+trait RichMatchers
+extends Matchers,
+  Diagrams,
+  TryValues,
+  EitherValues,
+  OptionValues,
+  AppendedClues,
+  ScalaFutures,
+  StreamlinedXml,
+  Inside,
+  Eventually,
+  IntegrationPatience

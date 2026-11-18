@@ -16,6 +16,9 @@
 
 package uk.gov.hmrc.agentriskingbackend.testsupport.testdata
 
+import java.time.Instant
+import java.time.Instant.now
+
 object TdAll:
 
   def apply(): TdAll = new TdAll {}
@@ -23,3 +26,5 @@ object TdAll:
   val tdAll: TdAll = new TdAll {}
 
 trait TdAll
+extends TdRequest:
+  lazy val instant: Instant = now
