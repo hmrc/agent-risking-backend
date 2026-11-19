@@ -94,4 +94,4 @@ extends AnyFreeSpecLike,
   }
 
 object ISpec:
-  val testServerPort: Int = 19004 // distinct per repo so sibling repos' suites do not clash
+  val testServerPort: Int = 19005 // distinct per repo so sibling repos' suites do not clash
