@@ -62,7 +62,7 @@ extends AnyFreeSpecLike,
       "auditing.consumer.baseUri.port" -> WireMockSupport.port,
       "auditing.enabled" -> false,
       "auditing.traceRequests" -> false,
-      "mongodb.uri" -> mongoUri,
+      "mongodb.uri" -> mongoUri
     ) ++ configOverrides
 
   protected def configOverrides: Map[String, Any] = Map[String, Any]()
