@@ -18,13 +18,7 @@ package uk.gov.hmrc.agentriskingbackend.controllers
 
 import play.api.http.Status
 import play.api.mvc.Request
-import play.api.mvc.Result
-import play.api.test.Helpers.*
-import play.api.test.FakeRequest
-import play.api.test.Helpers
 import play.api.libs.json.Json
-import uk.gov.hmrc.http.HttpResponse
-import uk.gov.hmrc.http.StringContextOps
 import uk.gov.hmrc.agentriskingbackend.util.RequestSupport.hc
 import uk.gov.hmrc.agentriskingbackend.testsupport.ControllerSpec
 import uk.gov.hmrc.http.HttpReads.Implicits.given
