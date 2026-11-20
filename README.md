@@ -1,9 +1,7 @@
 
-# agent-risking-backend
+# Agent risking backend
 
-This is a placeholder README.md for a new repository
-
-# Running the Service
+## Running the Service
 
 To start the service, use the following commands:
 
@@ -22,7 +20,7 @@ sm2 -stop-all \
 && sm2 -s
 ```
 
-# Project Setup in IntelliJ
+## Project Setup in IntelliJ
 
 When importing a project into IntelliJ IDEA, it is recommended to configure your setup as follows to optimize the
 development process:
